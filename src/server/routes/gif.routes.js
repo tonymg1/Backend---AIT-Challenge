@@ -1,12 +1,15 @@
-const express = require("express")
-const router = express.Router()
+'use strict';
 
-//lamada al controlador
-const gifController = require("../../contollers/gif.controllers")
+const express = require('express');
+const router = express.Router();
 
-//Peticiones
-router.post("/new", gifController.newPost)
-router.get("/show", gifController.showPost)
-router.delete("/:id", gifController.deletePost)
+// Controller
+const gifController = require('../../contollers/gif.controller');
 
-module.exports = router
+// Request
+router.post('', gifController.newPost);
+router.get('', gifController.showPosts);
+router.get('/:id', gifController.showPostById);
+router.delete('/:id', gifController.deletePostById);
+
+module.exports = router;

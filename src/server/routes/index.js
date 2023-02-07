@@ -1,10 +1,10 @@
-'use strict'
-const express = require("express");
+'use strict';
+
+const express = require('express');
 const router = express.Router();
 
-//lamada al controlador
-const gifController = require("../../contollers/gif.controllers")
+const gifRoutes = require('./gif.routes');
 
-router.use("/gif", gifRoutes);
+router.use('/gif', gifRoutes);
 
 module.exports = router;
