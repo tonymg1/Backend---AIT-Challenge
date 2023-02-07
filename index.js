@@ -1,26 +1,20 @@
+'use strict';
+
 const {conection} = require("./database/connection");
-const dotenv = require("dotenv")
-const cors = require("cors")
-const express = require("express")
-const gifRoutes = require("./src/routes/gif.routers")
+const server = require("./src/server")
+const config = require("./src/config/config")
 
-conection();
 
-const app = express();
-
-app.use(cors())
-
-dotenv.config()
-
-app.use(express.json())
-
-app.use(express.urlencoded({extended: true}))
-
-//cargar las rutas
-app.use("/api/gif", gifRoutes)
-
-port = 4000
-//Servidor a la escucha
-app.listen(port, ()=>{
-    console.log("Servidor escuchando en el puerto " + port)
-})
+const startServer = async () => {
+    try {
+      await conection(config.logger.info("MongoDB connected"));
+      server.listen(process.env.PORT, () => {
+        config.logger.info(`Server is running in port ${process.env.PORT}`);
+      });
+    } catch (error) {
+      console.log("Someting went wrong, server crashed!");
+      console.log(error)
+    }
+  };
+  
+  startServer();

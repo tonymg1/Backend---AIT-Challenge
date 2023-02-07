@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const gifSchema = mongoose.Schema({
-    title: 'String',
-    content: 'String',
+    title: String,
+    content: String,
 }, {
     timestamps: true,
 

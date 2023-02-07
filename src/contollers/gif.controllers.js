@@ -9,6 +9,8 @@ const newPost = async (req, res)=>{
     const {title, content} = req.body
     try {
         const newPosti = await gifModel.create({title, content})
+        // res.json(newPosti)
+        await newPosti.save()
         res.json(newPosti)
     } catch (error) {
         res.status(500).send(error)
@@ -24,6 +26,16 @@ const showPost = async(req, res)=>{
     }
 }
 
+const deletePost = async (req, res) => {
+    const { id } = req.params
+    try {
+        const posts = await postmodel.findOneAndDelete({ _id: id })
+
+        res.status(200).send({ status: true, data: posts })
+    } catch (error) {
+        res.status(500).send({ status: false, msg: error.message  })
+    }
+}
 
 
 // app.get('/:id', async(req, res)=>{
@@ -59,4 +71,4 @@ const showPost = async(req, res)=>{
 //     }
 // })
 
-module.exports = {newPost, showPost}
+module.exports = {newPost, showPost, deletePost}
