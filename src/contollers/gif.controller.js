@@ -1,11 +1,11 @@
 'use strict';
 
-const GifModel = require('../models/gif.model');
+const { GifModel, CATEGORIES } = require('../models/gif.model');
 
 const newPost = async (req, res) => {
-    const { title, content } = req.body;
+    const { title, content, category } = req.body;
     try {
-        const newPosti = await GifModel.create({ title, content });
+        const newPosti = await GifModel.create({ title, content, category });
         await newPosti.save();
         res.json(newPosti);
     } catch (error) {
@@ -13,13 +13,22 @@ const newPost = async (req, res) => {
     }
 };
 
-const showPosts = async (_, res) => {
+const showPosts = async (req, res) => {
+    const category = req.query.category;
     try {
-        const posts = await GifModel.find();
+        const params = {};
+        if (category) {
+            params.category = category;
+        }
+        const posts = await GifModel.find(params);
         res.json(posts);
     } catch (error) {
         res.status(500).send(error);
     }
+};
+
+const showCategories = async (_, res) => {
+    res.json(CATEGORIES);
 };
 
 const showPostById = async (req, res) => {
@@ -43,4 +52,4 @@ const deletePostById = async (req, res) => {
     }
 };
 
-module.exports = { newPost, showPosts, showPostById, deletePostById };
+module.exports = { newPost, showPosts, showCategories, showPostById, deletePostById };

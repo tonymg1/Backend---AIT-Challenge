@@ -1,8 +1,12 @@
+'use strict';
+
 const mongoose = require('mongoose');
+const CATEGORIES = ['cats', 'anime', 'gamer'];
 const gifSchema = mongoose.Schema(
     {
         title: { type: String, required: true },
-        content: { type: Buffer, required: true }
+        content: { type: Buffer, required: true },
+        category: { type: String, enum: CATEGORIES, required: true }
     },
     {
         timestamps: true
@@ -11,4 +15,4 @@ const gifSchema = mongoose.Schema(
 
 const GifModel = mongoose.model('gif', gifSchema);
 
-module.exports = GifModel;
+module.exports = { GifModel, CATEGORIES };
