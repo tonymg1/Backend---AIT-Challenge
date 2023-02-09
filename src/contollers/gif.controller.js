@@ -3,11 +3,13 @@
 const { GifModel, CATEGORIES } = require('../models/gif.model');
 
 const newPost = async (req, res) => {
-    const { title, content, category } = req.body;
+    const { title, category } = req.body;
+    const {buffer: content} = req.file
+
     try {
-        const newPosti = await GifModel.create({ title, content, category });
-        await newPosti.save();
-        res.json(newPosti);
+        const post = await GifModel.create({ title, content, category });
+        await post.save();
+        res.json(post);
     } catch (error) {
         res.status(500).send(error);
     }
