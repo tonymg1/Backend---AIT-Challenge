@@ -8,7 +8,7 @@ const conection = async () => {
         mongoose.set('strictQuery', true);
         await mongoose.connect(config.db.uri);
 
-        console.log('Conectado correctamente a la base de datos');
+        console.log('Database connected');
     } catch (error) {
         console.log(error);
         throw new Error('No se ha podido conectar a la base de datos');
