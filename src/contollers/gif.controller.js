@@ -53,5 +53,16 @@ const deletePostById = async (req, res) => {
         res.status(500).send({ status: false, msg: error.message });
     }
 };
+const editPost = async (req, res) => {
+    const { id } = req.params;
+    const { title } = req.body;
+  
+    try {
+      const post = await GifModel.findOneAndUpdate({ _id: id }, { title });
+      res.status(200).send({ status: true, data: post });
+    } catch (error) {
+      res.status(500).send({ status: false, msg: error.message, editPost });
+    }
+  };
 
 module.exports = { newPost, showPosts, showCategories, showPostById, deletePostById };
