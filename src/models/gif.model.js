@@ -1,7 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const CATEGORIES = ['cats', 'anime', 'gamer', 'beer', 'sport', 'music'];
+const CATEGORIES = ['cats', 'anime', 'gamer', 'beer', 'sport', 'music', 'animals', 'other'];
 const gifSchema = mongoose.Schema(
     {
         title: { type: String, required: true },
