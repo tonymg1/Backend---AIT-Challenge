@@ -15,6 +15,7 @@ router.get('/categories', gifController.showCategories);
 router.get('', gifController.showPosts);
 router.get('/:id', gifController.showPostById);
 // router.delete('/:id', middlewareAuth, gifController.deletePostById);
+router.patch("/edit/:id", gifController.editPost)
 router.delete('/:id', gifController.deletePostById);
 
 module.exports = router;

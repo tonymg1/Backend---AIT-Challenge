@@ -65,4 +65,4 @@ const editPost = async (req, res) => {
     }
   };
 
-module.exports = { newPost, showPosts, showCategories, showPostById, deletePostById };
+module.exports = { newPost, showPosts, showCategories, showPostById, deletePostById, editPost };
